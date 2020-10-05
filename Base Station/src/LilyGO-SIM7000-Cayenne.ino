@@ -1,6 +1,4 @@
 
- #include <ArduinoHttpClient.h>
-
 #define TINY_GSM_DEBUG Serial
 #define CAYENNE_PRINT Serial
 #define TINY_GSM_MODEM_SIM7000
@@ -70,11 +68,6 @@ const char * root_ca=\
 "AfvDbbnvRG15RjF+Cv6pgsH/76tuIMRQyV+dTZsXjAzlAcmgQWpzU/qlULRuJQ/7\n" \
 "TBj0/VLZjmmx6BEP3ojY+x1J96relc8geMJgEtslQIxq/H5COEBkEveegeGTLg==\n" \
 "-----END CERTIFICATE-----\n";
-
-
-WiFiClientSecure client;
-
-
 
 
 Adafruit_BMP085 bmp;
@@ -174,26 +167,7 @@ void loop()
 {
     Cayenne.loop();
  
- 
- delay(2000);
- sendData("info1=" + fakeFunc1()+"&info2="+String(fakeFunc2())+"&temp="+String(getFakeTemperature()));
-   
-
 }
-
-
-
-void sendData(String params) {
-   HTTPClient http;
-   String url="https://script.google.com/macros/s/"+GOOGLE_SCRIPT_ID+"/exec?"+params;
-   Serial.print(url);
-    Serial.print("Making a request");
-    http.begin(url, root_ca); //Specify the URL and certificate
-    int httpCode = http.GET();  
-    http.end();
-    Serial.println(": done "+httpCode);
-}
-
 
 
 
